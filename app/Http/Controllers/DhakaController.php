@@ -92,6 +92,13 @@ class DhakaController extends Controller
     {
         //
     }
+    public function dhakaUpdate(Request $request,$id){
+
+        $dhaka = Dhaka::find($id);
+        $dhaka->update($request->all());
+        
+        return response()->json($dhaka,200);
+    }
 
     /**
      * Remove the specified resource from storage.
