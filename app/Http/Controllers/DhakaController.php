@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Dhaka;
 
+use Validator;
+
 class DhakaController extends Controller
 {
     /**
@@ -42,6 +44,18 @@ class DhakaController extends Controller
     //     return response()->json($dhaka);
     // }
         public function dhakastore(Request $request){
+
+            $rules = [
+                'design'=>'required',
+                'materials'=>'required',
+                'items'=>'required',
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+
+            if($validator->fails()){
+                return response()->json($validator->error(),400);
+            }
                 $dhaka = Dhaka::create($request->all());
                 return response()->json($dhaka);
         }
@@ -64,6 +78,9 @@ class DhakaController extends Controller
     public function dhakaById($id){
 
         $dhaka = Dhaka::find($id);
+        if(is_null($country)){
+            return response()->json(["message"=>"record not found"], 404);
+        }
 
         return response()->json(Dhaka::find($id), 200);
 
@@ -95,8 +112,12 @@ class DhakaController extends Controller
     public function dhakaUpdate(Request $request,$id){
 
         $dhaka = Dhaka::find($id);
+
+        if(is_null($dhaka)){
+            return response()->json(["messsage"=>"record not found"],404);
+        }
+
         $dhaka->update($request->all());
-        
         return response()->json($dhaka,200);
     }
 
@@ -114,6 +135,10 @@ class DhakaController extends Controller
     public function dhakaDelete($id){
 
         $dhaka = Dhaka::find($id);
+
+        if(is_null($dhaka)){
+            return response()->json(["message"=>"record not found for deletion"],404);
+        }
         $dhaka->delete();
         return response()->json(null,204);
     }
