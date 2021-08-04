@@ -29,3 +29,5 @@ Route::get('dhaka/{id}',[DhakaController::class,'dhakaById']);
 Route::put('dhaka/{id}',[DhakaController::class,'dhakaUpdate']);
 
 Route::delete('dhaka/{id}',[DhakaController::class,'dhakaDelete']);
+
+Route::get('search/{design}',[DhakaController::class,'search']);
