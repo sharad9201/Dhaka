@@ -16,6 +16,7 @@ class Dhaka extends Model
     protected $fillable = [
         'design',
         'materials',
-        'items'
+        'items',
+        'stocks'
     ];
 }

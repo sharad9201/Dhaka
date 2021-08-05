@@ -30,6 +30,7 @@ class DhakaController extends Controller
                 'design'=>'required',
                 'materials'=>'required',
                 'items'=>'required',
+                'stocks'=>'required',
             ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -83,7 +84,10 @@ class DhakaController extends Controller
     }
 
     function search($design){
-
+        
+       
         return Dhaka::where("design","like","%".$design."%")->get();
     }
+
+    
 }
