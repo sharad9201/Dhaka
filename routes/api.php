@@ -33,3 +33,4 @@ Route::delete('dhaka/{id}',[DhakaController::class,'dhakaDelete']);
 Route::get('search/{design}',[DhakaController::class,'search']);
 
 Route::put('buyProduct/{dhaka}',[DhakaController::class,'buyProduct']);
+Route::put('addStocks/{dhaka}',[DhakaController::class,'addStocks']);

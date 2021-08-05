@@ -85,12 +85,11 @@ class DhakaController extends Controller
 
     function search($design, Dhaka $dhaka){
         
-        
        
         return Dhaka::where("design","like","%".$design."%")->get();
     }
 
-    function buyProduct(Request $request,Dhaka $dhaka){
+    function buyProduct(Request $request,Dhaka $dhaka){  // this can directly ask request, check if the data is null and finds 'id' in the model directly
         
         // $dhaka = Dhaka::find($id);
 
@@ -98,15 +97,23 @@ class DhakaController extends Controller
         //     return response()->json(["message"=>"record not found for deletion"],404);
 
         // }
+        
         $item_count = $request->stocks;
-        if($item_count > $dhaka->stocks){
+        //gets the request form the client
+        if($item_count > $dhaka->stocks){         //checks if the items is available
             return response()->json(["requested amount invalid "],400);
         }
+        // query to deduct the stocks if custommer  buys any item
         $dhaka->update(["stocks" => $dhaka->stocks- $item_count]);
         return response()->json($dhaka,200);
 
 
 
+    }
+    function addStocks(Request $request, Dhaka $dhaka){
+
+            $dhaka->update(["stocks"=> $dhaka->stocks + $request->stocks]);
+              return response()->json($dhaka,200);
     }
     
 }
