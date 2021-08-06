@@ -115,5 +115,10 @@ class DhakaController extends Controller
             $dhaka->update(["stocks"=> $dhaka->stocks + $request->stocks]);
               return response()->json($dhaka,200);
     }
+
+    // function addproductPrice(Request $request, Dhaka $dhaka){
+
+    //     $dhaka->update(["price"=> $dhaka->price * $request->item] );
+    // }
     
 }
